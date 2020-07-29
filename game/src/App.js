@@ -1,12 +1,12 @@
 import React, { useState, useCallback, useRef } from "react";
 import produce from "immer";
-import "./App.css";
+import "./sass/App.scss";
 
 import Grid from "./components/Grid";
 
 function App() {
   return (
-    <div className="main">
+    <div className="main-container">
       <Grid />
     </div>
   );

@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useRef } from "react";
 import produce from "immer";
 
+import "./grid.scss";
+
 import patterns from "../Patterns";
 
 const numRows = 50;
@@ -113,7 +115,7 @@ const Grid = () => {
     setTimeout(runSimulation, evolution_time);
   }, []);
   return (
-    <div className="interactive">
+    <div className="interactive-container">
       <div className="buttons-logic">
         <button
           onClick={() => {
@@ -192,8 +194,8 @@ const Grid = () => {
       <div
         className="grid"
         style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${numCols}, 30px)`,
+          //   display: "grid",
+          gridTemplateColumns: `repeat(${numCols}, 20px)`,
         }}
       >
         {grid.map((rows, i) =>
@@ -207,8 +209,8 @@ const Grid = () => {
                 handleSelect(i, k);
               }}
               style={{
-                width: 30,
-                height: 30,
+                width: 20,
+                height: 20,
                 backgroundColor: grid[i][k] ? "black" : undefined,
                 border: "solid 1px black",
               }}
