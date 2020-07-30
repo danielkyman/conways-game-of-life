@@ -3,6 +3,8 @@
 .main-container {
   width: 1200px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin: auto;
 }

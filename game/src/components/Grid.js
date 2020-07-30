@@ -41,7 +41,7 @@ const Grid = () => {
 
   const [currentPattern, setCurrentPattern] = useState([]);
 
-  const [evolutions, setEvolutions] = useState(0);
+  //   const [evolutions, setEvolutions] = useState(0);
 
   const runningRef = useRef(running);
   runningRef.current = running;
@@ -81,11 +81,12 @@ const Grid = () => {
     }
   };
 
-  // const incrementEvo = () => {
-  //   // let evo = evolutions + 1;
-  //   // setEvolutions(evo);
-  //   // console.log("timer");
-  // };
+  let evolutions = 0;
+
+  const increment = () => {
+    console.log("evo");
+    evolutions = evolutions + 1;
+  };
 
   const runSimulation = useCallback(() => {
     if (!runningRef.current) {
@@ -109,6 +110,9 @@ const Grid = () => {
               gridCopy[i][k] = 1;
             }
           }
+        }
+        if (gridCopy !== grid) {
+          increment();
         }
       });
     });
@@ -145,6 +149,7 @@ const Grid = () => {
         <button
           onClick={() => {
             setGrid(generateEmptyGrid());
+            evolutions = 0;
           }}
         >
           clear
