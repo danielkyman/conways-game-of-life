@@ -111,6 +111,9 @@ const Grid = () => {
         if (gridCopy !== grid) {
           increment();
         }
+        if (gridCopy == grid) {
+          setEvolutions(0);
+        }
       });
     });
     setTimeout(runSimulation, evolution_time);
@@ -177,7 +180,9 @@ const Grid = () => {
                 style={{
                   // width: 20,
                   // height: 20,
-                  backgroundColor: grid[i][k] ? "black" : undefined,
+                  backgroundColor: grid[i][k]
+                    ? "rgba(0, 0, 0, .95)"
+                    : undefined,
                   // border: "solid 1px black",
                 }}
               />
@@ -187,7 +192,9 @@ const Grid = () => {
       </div>
       <div className="grid-right-container">
         <div className="buttons-patterns">
+          <h2>Place a Pattern:</h2>
           <button
+            className="button-block"
             onClick={() => {
               setPlacing(!placing);
               setCurrentPattern(patterns.block);
@@ -198,9 +205,10 @@ const Grid = () => {
               }
             }}
           >
-            place block
+            {/* place block */}
           </button>
           <button
+            className="button-blinker"
             onClick={() => {
               setPlacing(!placing);
               setCurrentPattern(patterns.blinker);
@@ -211,9 +219,10 @@ const Grid = () => {
               }
             }}
           >
-            place blinker
+            {/* place blinker */}
           </button>
           <button
+            className="button-oscillator"
             onClick={() => {
               setPlacing(!placing);
               setCurrentPattern(patterns.penta);
@@ -224,7 +233,7 @@ const Grid = () => {
               }
             }}
           >
-            place penta-something
+            {/* place oscillator */}
           </button>
         </div>
         <div className="stats">
