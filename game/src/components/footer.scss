@@ -1,15 +1,16 @@
-@import './welcome.scss';
+@import "./welcome.scss";
 
 .footer-container {
   width: 100%;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: darkslategray;
+  background-color: rgb(15, 42, 42);
   border-top: 3px solid rgb(0, 0, 0);
+  box-shadow: -1px 0px 11px 3px rgba(0, 0, 0, 0.58);
 
   h1 {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.8rem;
     font-family: $welcome-font;
   }
 }

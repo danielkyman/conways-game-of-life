@@ -1,26 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
 
 @font-face {
-  font-family: 'bladeRunner';
-  src: url('../fonts/BLADRMF_.TTF') format('truetype');
+  font-family: "bladeRunner";
+  src: url("../fonts/BLADRMF_.TTF") format("truetype");
 }
 
-$welcome-font: 'bladeRunner', sans-serif;
-$alt-font: 'Krona One', sans-serif;
+$welcome-font: "bladeRunner", sans-serif;
+$alt-font: "Krona One", sans-serif;
 
 .welcome-container {
-  height: 100vh;
+  height: 90%;
   // border: 1px solid red;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  border-bottom: 5px solid rgb(212, 212, 212);
+  box-shadow: -1px 0px 11px 3px rgba(0, 0, 0, 0.58);
+  background-image: url("../img/welcome-background.jpg");
+  background-repeat: repeat-Y;
+  // padding-bottom: 40px;
 }
 .welcome-text-container {
   display: flex;
+  padding-bottom: 40px;
   flex-direction: column;
   text-align: center;
+
+  padding-top: 60px;
+  background-color: rgba(255, 255, 255, 0.26);
   .game-of-life {
     text-decoration: underline;
   }

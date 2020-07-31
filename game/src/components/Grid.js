@@ -7,7 +7,7 @@ import patterns from "../Patterns";
 
 const numRows = 30;
 const numCols = 30;
-const evolution_time = 50;
+const evolution_time = 70;
 
 const operations = [
   [0, 1],
@@ -82,7 +82,7 @@ const Grid = () => {
   };
 
   const increment = () => {
-    setEvolutions(evolutionsRef.current += 1)
+    setEvolutions((evolutionsRef.current += 1));
   };
 
   const runSimulation = useCallback(() => {
@@ -118,118 +118,121 @@ const Grid = () => {
   return (
     <div className="interactive-container">
       <div className="grid-left-container">
-      <div className="buttons-logic">
-        <button
-          onClick={() => {
-            setRunning(!running);
-            if (!running) {
-              runningRef.current = true;
-              runSimulation();
-            }
-          }}
-        >
-          {running ? "stop" : "start"}
-        </button>
-        <button
-          onClick={() => {
-            const rows = [];
-            for (let i = 0; i < numRows; i++) {
-              rows.push(
-                Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
-              );
-            }
+        <div className="buttons-logic">
+          <button
+            onClick={() => {
+              setRunning(!running);
+              if (!running) {
+                runningRef.current = true;
+                runSimulation();
+              }
+            }}
+          >
+            {running ? "stop" : "start"}
+          </button>
+          <button
+            onClick={() => {
+              const rows = [];
+              for (let i = 0; i < numRows; i++) {
+                rows.push(
+                  Array.from(Array(numCols), () =>
+                    Math.random() > 0.7 ? 1 : 0
+                  )
+                );
+              }
 
-            setGrid(rows);
+              setGrid(rows);
+            }}
+          >
+            random
+          </button>
+          <button
+            onClick={() => {
+              setGrid(generateEmptyGrid());
+              setEvolutions(0);
+            }}
+          >
+            clear
+          </button>
+        </div>
+
+        <div
+          className="grid"
+          style={{
+            //   display: "grid",
+            gridTemplateColumns: `repeat(${numCols}, 20px)`,
           }}
         >
-          random
-        </button>
-        <button
-          onClick={() => {
-            setGrid(generateEmptyGrid());
-            setEvolutions(0)
-          }}
-        >
-          clear
-        </button>
-      </div>
-      
-      <div
-        className="grid"
-        style={{
-          //   display: "grid",
-          gridTemplateColumns: `repeat(${numCols}, 20px)`,
-        }}
-      >
-        {grid.map((rows, i) =>
-          rows.map((col, k) => (
-            <div
-              key={`${i}-${k}`}
-              onMouseEnter={() => {
-                handlePosition(i, k);
-              }}
-              onClick={() => {
-                handleSelect(i, k);
-              }}
-              style={{
-                width: 20,
-                height: 20,
-                backgroundColor: grid[i][k] ? "black" : undefined,
-                border: "solid 1px darkslategray",
-              }}
-            />
-          ))
-        )}
-      </div>
+          {grid.map((rows, i) =>
+            rows.map((col, k) => (
+              <div
+                className="grid-squares"
+                key={`${i}-${k}`}
+                onMouseEnter={() => {
+                  handlePosition(i, k);
+                }}
+                onClick={() => {
+                  handleSelect(i, k);
+                }}
+                style={{
+                  // width: 20,
+                  // height: 20,
+                  backgroundColor: grid[i][k] ? "black" : undefined,
+                  // border: "solid 1px black",
+                }}
+              />
+            ))
+          )}
+        </div>
       </div>
       <div className="grid-right-container">
-      <div className="buttons-patterns">
-        <button
-          onClick={() => {
-            setPlacing(!placing);
-            setCurrentPattern(patterns.block);
-            if (!placing) {
-              placingRef.current = true;
-              // setCurrentPattern(patterns.block);
-              handlePlace(patterns.block);
-            }
-          }}
-        >
-          place block
-        </button>
-        <button
-          onClick={() => {
-            setPlacing(!placing);
-            setCurrentPattern(patterns.blinker);
-            if (!placing) {
-              placingRef.current = true;
-              // setCurrentPattern(patterns.block);
-              handlePlace(patterns.blinker);
-            }
-          }}
-        >
-          place blinker
-        </button>
-        <button
-          onClick={() => {
-            setPlacing(!placing);
-            setCurrentPattern(patterns.penta);
-            if (!placing) {
-              placingRef.current = true;
-              // setCurrentPattern(patterns.block);
-              handlePlace(patterns.penta);
-            }
-          }}
-        >
-          place penta-something
-        </button>
-      </div>
-      <div className="stats">
-        <h2>
-          Current Position X:{currentPos.x}, y:{currentPos.y}
-        </h2>
-        <h2>There have been {evolutionsRef.current} evolutions</h2>
-      </div>
+        <div className="buttons-patterns">
+          <button
+            onClick={() => {
+              setPlacing(!placing);
+              setCurrentPattern(patterns.block);
+              if (!placing) {
+                placingRef.current = true;
+                // setCurrentPattern(patterns.block);
+                handlePlace(patterns.block);
+              }
+            }}
+          >
+            place block
+          </button>
+          <button
+            onClick={() => {
+              setPlacing(!placing);
+              setCurrentPattern(patterns.blinker);
+              if (!placing) {
+                placingRef.current = true;
+                // setCurrentPattern(patterns.block);
+                handlePlace(patterns.blinker);
+              }
+            }}
+          >
+            place blinker
+          </button>
+          <button
+            onClick={() => {
+              setPlacing(!placing);
+              setCurrentPattern(patterns.penta);
+              if (!placing) {
+                placingRef.current = true;
+                // setCurrentPattern(patterns.block);
+                handlePlace(patterns.penta);
+              }
+            }}
+          >
+            place penta-something
+          </button>
+        </div>
+        <div className="stats">
+          <h2>
+            Current Position X:{currentPos.x}, y:{currentPos.y}
+          </h2>
+          <h2>There have been {evolutionsRef.current} evolutions</h2>
+        </div>
       </div>
     </div>
   );

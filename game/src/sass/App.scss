@@ -1,7 +1,11 @@
-@import './reset.scss';
+@import "./reset.scss";
 
 #root {
-  background-color: darkslategrey;
+  background-color: rgb(15, 42, 42);
+}
+
+html {
+  background-color: rgb(15, 42, 42);
 }
 
 .main-container {
