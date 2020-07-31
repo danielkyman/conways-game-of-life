@@ -5,8 +5,8 @@ import "./grid.scss";
 
 import patterns from "../Patterns";
 
-const numRows = 50;
-const numCols = 50;
+const numRows = 30;
+const numCols = 30;
 const evolution_time = 50;
 
 const operations = [
@@ -41,7 +41,7 @@ const Grid = () => {
 
   const [currentPattern, setCurrentPattern] = useState([]);
 
-  //   const [evolutions, setEvolutions] = useState(0);
+  const [evolutions, setEvolutions] = useState(0);
 
   const runningRef = useRef(running);
   runningRef.current = running;
@@ -49,8 +49,8 @@ const Grid = () => {
   const placingRef = useRef(placing);
   placingRef.current = placing;
 
-  // const currentPatternRef = useRef(currentPattern);
-  // currentPatternRef.current = currentPattern;
+  const evolutionsRef = useRef(evolutions);
+  evolutionsRef.current = evolutions;
 
   const handlePosition = (x, y) => {
     setCurrentPos({ x: x, y: y });
@@ -81,11 +81,8 @@ const Grid = () => {
     }
   };
 
-  let evolutions = 0;
-
   const increment = () => {
-    console.log("evo");
-    evolutions = evolutions + 1;
+    setEvolutions(evolutionsRef.current += 1)
   };
 
   const runSimulation = useCallback(() => {
@@ -117,9 +114,10 @@ const Grid = () => {
       });
     });
     setTimeout(runSimulation, evolution_time);
-  }, []);
+  }, [grid]);
   return (
     <div className="interactive-container">
+      <div className="grid-left-container">
       <div className="buttons-logic">
         <button
           onClick={() => {
@@ -149,12 +147,42 @@ const Grid = () => {
         <button
           onClick={() => {
             setGrid(generateEmptyGrid());
-            evolutions = 0;
+            setEvolutions(0)
           }}
         >
           clear
         </button>
       </div>
+      
+      <div
+        className="grid"
+        style={{
+          //   display: "grid",
+          gridTemplateColumns: `repeat(${numCols}, 20px)`,
+        }}
+      >
+        {grid.map((rows, i) =>
+          rows.map((col, k) => (
+            <div
+              key={`${i}-${k}`}
+              onMouseEnter={() => {
+                handlePosition(i, k);
+              }}
+              onClick={() => {
+                handleSelect(i, k);
+              }}
+              style={{
+                width: 20,
+                height: 20,
+                backgroundColor: grid[i][k] ? "black" : undefined,
+                border: "solid 1px darkslategray",
+              }}
+            />
+          ))
+        )}
+      </div>
+      </div>
+      <div className="grid-right-container">
       <div className="buttons-patterns">
         <button
           onClick={() => {
@@ -196,38 +224,12 @@ const Grid = () => {
           place penta-something
         </button>
       </div>
-      <div
-        className="grid"
-        style={{
-          //   display: "grid",
-          gridTemplateColumns: `repeat(${numCols}, 20px)`,
-        }}
-      >
-        {grid.map((rows, i) =>
-          rows.map((col, k) => (
-            <div
-              key={`${i}-${k}`}
-              onMouseEnter={() => {
-                handlePosition(i, k);
-              }}
-              onClick={() => {
-                handleSelect(i, k);
-              }}
-              style={{
-                width: 20,
-                height: 20,
-                backgroundColor: grid[i][k] ? "black" : undefined,
-                border: "solid 1px black",
-              }}
-            />
-          ))
-        )}
-      </div>
       <div className="stats">
         <h2>
           Current Position X:{currentPos.x}, y:{currentPos.y}
         </h2>
-        <h2>There have been {evolutions} evolutions</h2>
+        <h2>There have been {evolutionsRef.current} evolutions</h2>
+      </div>
       </div>
     </div>
   );

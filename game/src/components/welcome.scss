@@ -1,7 +1,46 @@
-.welcome-container {
-  height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+
+@font-face {
+  font-family: 'bladeRunner';
+  src: url('../fonts/BLADRMF_.TTF') format('truetype');
 }
 
-h1 {
-  font-size: 10rem;
+$welcome-font: 'bladeRunner', sans-serif;
+$alt-font: 'Krona One', sans-serif;
+
+.welcome-container {
+  height: 100vh;
+  // border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 5px solid rgb(212, 212, 212);
+}
+.welcome-text-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  .game-of-life {
+    text-decoration: underline;
+  }
+  h1 {
+    font-size: 8rem;
+    // border: 1px solid red;
+    font-family: $welcome-font;
+  }
+  h2 {
+    font-size: 3rem;
+    margin-top: 40px;
+    font-family: $alt-font;
+  }
+  li {
+    font-size: 1.3rem;
+    margin-top: 40px;
+    font-family: $alt-font;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 2rem;
+  }
 }

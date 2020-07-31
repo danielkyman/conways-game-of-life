@@ -1,4 +1,8 @@
-@import "./reset.scss";
+@import './reset.scss';
+
+#root {
+  background-color: darkslategrey;
+}
 
 .main-container {
   width: 1200px;
@@ -7,4 +11,7 @@
   justify-content: center;
   align-items: center;
   margin: auto;
+  background-color: white;
+  border-left: 3px solid rgb(0, 0, 0);
+  border-right: 3px solid rgb(0, 0, 0);
 }
